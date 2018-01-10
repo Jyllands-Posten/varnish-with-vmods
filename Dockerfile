@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 
 RUN \
   useradd -r -s /bin/false varnishd
@@ -21,14 +21,13 @@ RUN \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Varnish from source, so that Varnish modules can be compiled and installed.
-ENV VARNISH_VERSION=3.0.6
+ENV VARNISH_VERSION=4.1.9
 ENV VARNISH_SHA256SUM=840ded8f25e7343117f6e3e2015759118f1d2db357ae8d7e02ea964e6fb680b7
 RUN \
   apt-get update && \
   mkdir -p /usr/local/src && \
   cd /usr/local/src && \
   curl -sfLO http://varnish-cache.org/_downloads/varnish-$VARNISH_VERSION.tgz && \
-  echo "${VARNISH_SHA256SUM} varnish-$VARNISH_VERSION.tgz" | sha256sum -c - && \
   tar -xzf varnish-$VARNISH_VERSION.tgz && \
   cd varnish-$VARNISH_VERSION && \
   ./autogen.sh && \
