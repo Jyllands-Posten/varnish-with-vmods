@@ -7,4 +7,5 @@ exec varnishd 				\
 	-F 				\
 	-f /etc/varnish/default.vcl 	\
 	-s ${VARNISH_STORAGE_BACKEND} 	\
-	-a 0.0.0.0:${VARNISH_PORT}
+	-a 0.0.0.0:${VARNISH_PORT}      \
+    -p vcc_allow_inline_c=on 
